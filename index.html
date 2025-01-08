@@ -1,24 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StoryLand AI</title>
-    <script>
-        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-        if (/android/i.test(userAgent)) {
-            // Redireciona para a Google Play
-            window.location.href = "https://play.google.com/store/apps/details?id=com.seuapp.android";
-        } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-            // Redireciona para a Apple App Store
-            window.location.href = "https://apps.apple.com/app/id123456789";
-        } else {
-            // URL alternativa para outros dispositivos
-            window.location.href = "https://seusite.com";
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
         }
-    </script>
+        .app-links {
+            margin-top: 20px;
+        }
+        .app-links a {
+            margin-right: 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .app-links img {
+            width: 50px;
+            height: auto;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+    </style>
 </head>
 <body>
-    <p>Redirecionando...</p>
+    <h1>Redirecionando para o app...</h1>
+    <div id="redirect-message">
+        <p>Por favor, aguarde enquanto redirecionamos você para o app.</p>
+    </div>
+    
+    <div class="app-links" id="alternative-links" style="display: none;">
+        <h2>Baixe o app nas lojas:</h2>
+        <a href="https://apps.apple.com/app/id6740246948" target="_blank">
+            App Store
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/App_Store_%28iOS%29.svg/1280px-App_Store_%28iOS%29.svg.png" alt="App Store">
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=br.com.gleicisantana.storylandai" target="_blank">
+            Google Play
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Google_Play_Store_logo_2015.svg/1280px-Google_Play_Store_logo_2015.svg.png" alt="Google Play">
+        </a>
+    </div>
+
+    <script>
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        const redirectMessage = document.getElementById("redirect-message");
+        const alternativeLinks = document.getElementById("alternative-links");
+
+        if (/android/i.test(userAgent)) {
+            // Redireciona automaticamente para o Google Play
+            setTimeout(() => {
+                window.location.href = "https://play.google.com/store/apps/details?id=br.com.gleicisantana.storylandai";
+            }, 2000); // Aguarda 2 segundos antes do redirecionamento
+        } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+            // Redireciona automaticamente para a App Store
+            setTimeout(() => {
+                window.location.href = "https://apps.apple.com/app/id6740246948";
+            }, 2000); // Aguarda 2 segundos antes do redirecionamento
+        } else {
+            // Exibe os links alternativos para outros dispositivos
+            redirectMessage.innerHTML = "<p>Seu dispositivo não é compatível. Confira as opções abaixo:</p>";
+            alternativeLinks.style.display = 'block'; // Exibe os links alternativos
+        }
+    </script>
 </body>
 </html>
